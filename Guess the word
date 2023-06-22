@@ -1,0 +1,35 @@
+import random
+
+word_list = ['математика', 'геометрия', 'информатика', 'программирование', 'питон', 'образование', 'телефон']
+
+def get_word():
+  res = random.choice(word_list)
+  return res.upper()
+
+word = get_word()
+
+def play(word):
+  guessed = False
+  print('Давайте играть в угадайку слов!')
+  print('_' * len(word))
+  print()
+  print('Введите букву')
+  word_completion = ['_'] * len(word)
+  word_to_char = list(word)
+  while guessed == False:
+    for i in range(len(word_to_char)):
+      alpha = input()
+      if alpha.upper() not in word_to_char:
+        print('Неправильная буква')
+      elif alpha.upper() in word_to_char:
+        indices = [ind for ind, ele in enumerate(word_to_char) if ele == alpha.upper()]
+        for j in range(len(word_completion)):
+          if j in indices:
+            word_completion[j] = alpha.upper()
+      word_completion_str = ''.join(word_completion)
+      if word_completion_str == word:
+        guessed = True
+        print('Вы угадали слово:', word_completion_str)
+        break
+      print(word_completion_str)
+play(word)
